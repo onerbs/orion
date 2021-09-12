@@ -1,0 +1,25 @@
+version: "3.4"
+
+services:
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./api
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    ports:
+      - 2500:2500
+
+  ui:
+    depends_on:
+      - api
+    build:
+      dockerfile: Dockerfile
+      context: ./ui
+    volumes:
+      - ./ui:/app
+      - /app/node_modules
+    ports:
+      - 3500:3500
